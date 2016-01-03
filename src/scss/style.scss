@@ -1,0 +1,121 @@
+@import "_constants"; 
+
+/*******************************************************************************/
+/*****************************CHART IMMIGRATION ********************************/
+/*******************************************************************************/
+body{
+    background-color: $color-body-bg;
+    h1{
+       font-size: 1.2em; 
+    }
+    #pop-chart{
+        background-color: $color-chart-bg;
+        width: 800px;
+        height: 400px;
+        border: 1px solid $color-border;
+        g.hover-group{
+            rect{
+                fill: none;
+            }
+            rect.highlighted{
+                fill: $color-hover-el;
+            }
+            rect.selected{
+                fill: $color-sel-el;
+            }
+        }
+        .axis text {
+            font: 10px sans-serif;
+        }
+        .axis path{
+            fill: none;
+            stroke: #000;
+            stroke-width: 0.5px;
+        }
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        path{//population
+             stroke: $color-chart-path;
+             stroke-width: 2.5px;
+             cursor: pointer;
+        }
+        g.rgroups2>rect{//immigration
+                        stroke: none;
+                        fill: $color-all;
+                        cursor: pointer;
+        }
+    }
+
+    /*******************************************************************************/
+    /************************************* MAP *************************************/
+    /*******************************************************************************/
+    #israel-map{
+        position: relative;
+        background-color: $color-chart-bg;
+        width: 800px;
+        height: 400px;
+        border: 1px solid $color-border;
+        border-top: 0;
+
+        text.label{
+            font-size: 100px;
+        }
+        path {
+            fill: $color-map-state;
+            stroke: $color-map-border-state;
+            stroke-width: 1px;
+            &#path_ISR {
+                fill: $color-sel-el;
+                stroke-width: 0.25px;
+            }
+        }
+        .subunit-label {
+            fill: $color-label;
+            fill-opacity: .5;
+            font-size: 20px;
+            font-weight: 300;
+            text-anchor: middle;
+        }
+
+        /* arrow ---------------------------------------------------------------------*/
+        path.arrow-link{
+            fill: none;
+            stroke: #0000ff;
+            stroke-width: 2px;
+        }
+
+        marker#arrow-normal path{
+            fill: #fff;
+            stroke: $color-israel;
+            stroke-width: 1px;
+        }
+
+        text.label-arrow{
+            font-size  : 30px;
+            fill       : $color-israel;
+        }   
+        text.label-arrow>textPath{
+            spacing: auto ;
+            alignment-baseline: text-after-edge;
+        }
+        #legend-map{
+            position: absolute;
+            background-color: $color-chart-bg;
+            padding: 3px;
+            font-size: 0.9em;
+            top: 10px;
+            left: 10px;
+            p{
+                font-style: italic;
+            }
+            table tr>td:first-child{
+              min-width: 150px;  
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,133 @@
+/*******************************************************************************/
+/*****************************CHART IMMIGRATION ********************************/
+/*******************************************************************************/
+/* line 6, ../../src/scss/style.scss */
+body {
+  background-color: #e6e6e6;
+  /*******************************************************************************/
+  /************************************* MAP *************************************/
+  /*******************************************************************************/
+}
+/* line 8, ../../src/scss/style.scss */
+body h1 {
+  font-size: 1.2em;
+}
+/* line 11, ../../src/scss/style.scss */
+body #pop-chart {
+  background-color: #fff;
+  width: 800px;
+  height: 400px;
+  border: 1px solid #ddd;
+}
+/* line 17, ../../src/scss/style.scss */
+body #pop-chart g.hover-group rect {
+  fill: none;
+}
+/* line 20, ../../src/scss/style.scss */
+body #pop-chart g.hover-group rect.highlighted {
+  fill: #ffffb3;
+}
+/* line 23, ../../src/scss/style.scss */
+body #pop-chart g.hover-group rect.selected {
+  fill: #e5e600;
+}
+/* line 27, ../../src/scss/style.scss */
+body #pop-chart .axis text {
+  font: 10px sans-serif;
+}
+/* line 30, ../../src/scss/style.scss */
+body #pop-chart .axis path {
+  fill: none;
+  stroke: #000;
+  stroke-width: 0.5px;
+}
+/* line 35, ../../src/scss/style.scss */
+body #pop-chart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+/* line 40, ../../src/scss/style.scss */
+body #pop-chart path {
+  stroke: rgba(0, 0, 0, 0.05);
+  stroke-width: 2.5px;
+  cursor: pointer;
+}
+/* line 45, ../../src/scss/style.scss */
+body #pop-chart g.rgroups2 > rect {
+  stroke: none;
+  fill: #a6a6a6;
+  cursor: pointer;
+}
+/* line 55, ../../src/scss/style.scss */
+body #israel-map {
+  position: relative;
+  background-color: #fff;
+  width: 800px;
+  height: 400px;
+  border: 1px solid #ddd;
+  border-top: 0;
+  /* arrow ---------------------------------------------------------------------*/
+}
+/* line 63, ../../src/scss/style.scss */
+body #israel-map text.label {
+  font-size: 100px;
+}
+/* line 66, ../../src/scss/style.scss */
+body #israel-map path {
+  fill: #a6a6a6;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+/* line 70, ../../src/scss/style.scss */
+body #israel-map path#path_ISR {
+  fill: #e5e600;
+  stroke-width: 0.25px;
+}
+/* line 75, ../../src/scss/style.scss */
+body #israel-map .subunit-label {
+  fill: #777;
+  fill-opacity: .5;
+  font-size: 20px;
+  font-weight: 300;
+  text-anchor: middle;
+}
+/* line 84, ../../src/scss/style.scss */
+body #israel-map path.arrow-link {
+  fill: none;
+  stroke: #0000ff;
+  stroke-width: 2px;
+}
+/* line 90, ../../src/scss/style.scss */
+body #israel-map marker#arrow-normal path {
+  fill: #fff;
+  stroke: #003FC0;
+  stroke-width: 1px;
+}
+/* line 96, ../../src/scss/style.scss */
+body #israel-map text.label-arrow {
+  font-size: 30px;
+  fill: #003FC0;
+}
+/* line 100, ../../src/scss/style.scss */
+body #israel-map text.label-arrow > textPath {
+  spacing: auto;
+  alignment-baseline: text-after-edge;
+}
+/* line 104, ../../src/scss/style.scss */
+body #israel-map #legend-map {
+  position: absolute;
+  background-color: #fff;
+  padding: 3px;
+  font-size: 0.9em;
+  top: 10px;
+  left: 10px;
+}
+/* line 111, ../../src/scss/style.scss */
+body #israel-map #legend-map p {
+  font-style: italic;
+}
+/* line 114, ../../src/scss/style.scss */
+body #israel-map #legend-map table tr > td:first-child {
+  min-width: 150px;
+}
