@@ -282,17 +282,15 @@ CHARTMAP.map = {
       var _minY = _this.isrCoods[1] - 1;
       var _maxX = _this.isrCoods[0] - 1;
       var _maxY = _this.isrCoods[1] - 1;
-      var _israelCircle = [_this.isrCoods[0], _this.isrCoods[1], 4];
+      var _israelCircle = [_this.isrCoods[0], _this.isrCoods[1], 4.5];
 
       for (i = 0; i < 5; i++) {
         var _landCoord = _this.landCoords[_orderedLand[i].code];
-        //console.log(_landCoord, _orderedLand[i].code);
         var _isrCoods = _this.isrCoods;
-        //var _intersectPoint = CHARTMAP.geometricFunctions.getIntersections(_landCoord, _this.isrCoods, _israelCircle);
-        //console.log('_intersectPoint', _intersectPoint);
-        /*if (_intersectPoint && _intersectPoint.points && _intersectPoint.points.intersection1) {
+        var _intersectPoint = CHARTMAP.geometricFunctions.getIntersections(_landCoord, _this.isrCoods, _israelCircle);
+        if (_intersectPoint && _intersectPoint.points && _intersectPoint.points.intersection1) {
           _isrCoods = _intersectPoint.points.intersection1.coords;
-        }*/
+        }
         _links.push({
           id: 'arrow_' + i,
           type: 'LineString',
@@ -321,7 +319,7 @@ CHARTMAP.map = {
     //enter
     pathArcs.enter().append('path')
         .attr('marker-end', function (d) {
-          return 'url(\#point-end' + ')';
+          return 'url(\#arrow-end' + ')';
         })
         .attr('marker-start', function (d) {
           return 'url(\#point-start' + ')';
@@ -354,7 +352,6 @@ CHARTMAP.map = {
     var _this = this;
     this.g.selectAll('.label-arrow').remove();
     links.forEach(function (el, index) {
-      //console.log('test for text!!!  ', el, index);
       var text = _this.g.append('text')
           .attr('class', 'label-arrow');
       text.append('textPath')
@@ -416,7 +413,6 @@ CHARTMAP.map = {
       }
     }
     var orderedLand = this.landDataset.sort(function (a, b) {
-      //console.log('a', a, findfield, a[findfield] - b[findfield])
       return b[_findfield] - a[_findfield];
     }, function (d) {
       return d.land;
@@ -447,13 +443,11 @@ CHARTMAP.map = {
     var x = (bounds[0][0] + bounds[1][0]) / 2;
     var y = (bounds[0][1] + bounds[1][1]) / 2;
     var _scale = 0.9 * Math.min(this.WIDTH / dx, this.HEIGHT / dy);
-    //    console.log('_scale',_scale);
     if (_scale < 0.4352752)
       _scale = 0.44;
     if (_scale > 2.6390)
       _scale = 2.6;
     var _translate = [this.WIDTH / 2 - (_scale * x), this.HEIGHT / 2 - (_scale * y)];
-    //    console.log('_translate', _translate);
     _this.zoom.translate(_translate).scale(_scale);
     _this.zoom.event(_this.g.transition().duration(1500));
   },
@@ -461,31 +455,18 @@ CHARTMAP.map = {
    *  Adds the definition to svgContainer of an arrow
    */
   addDefinitionForArrow: function () {
-//    this.svg.append('svg:defs')
-//        .append('svg:marker')
-//        .attr('id', 'point-end')
-//        .attr('refX', 20)
-//        .attr('refY', 20)
-//        .attr('markerUnits', 'strokeWidth')
-//        .attr('markerWidth', 40)
-//        .attr('markerHeight', 40)
-//        .attr('orient', 'auto')
-//        .append("circle")
-//        .attr("cx", 20)
-//        .attr("cy", 20)
-//        .attr("r", 20);
-//    this.svg.append('svg:defs')
-//        .append('svg:marker')
-//        .attr('id', 'arrow-end')
-//        //.attr('viewBox', '0 0 60 8')
-//        .attr('refX', 50)
-//        .attr('refY', 4)
-//        .attr('markerUnits', 'strokeWidth')
-//        .attr('markerWidth', 25)
-//        .attr('markerHeight', 8)
-//        .attr('orient', 'auto')
-//        .append('svg:path')
-//        .attr('d', 'M 0 0 L 25 4 L 0 8 z');
+    this.svg.append('svg:defs')
+        .append('svg:marker')
+        .attr('id', 'arrow-end')
+        //.attr('viewBox', '0 0 60 8')
+        .attr('refX', 15)
+        .attr('refY', 4)
+        .attr('markerUnits', 'strokeWidth')
+        .attr('markerWidth', 14)
+        .attr('markerHeight', 8)
+        .attr('orient', 'auto')
+        .append('svg:path')
+        .attr('d', 'M 0 0 L 14 4 L 0 8 z');
     this.svg.append('svg:defs')
         .append('svg:marker')
         .attr('id', 'point-start')
