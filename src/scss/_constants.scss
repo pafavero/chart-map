@@ -1,15 +1,20 @@
-$color-body-bg:  #e6e6e6;
+$color-body-bg:  #fff;//#e6e6e6;
 $color-border: #ddd;
-$color-chart-bg:  #fff;
-$color-label:  #777;
 
 $color-israel: #003FC0;
 $color-arab: #007A3D;
 $color-other: #3f3f3f;
+$color-sel-el: #e5e600;
 
+/* chart **************************************************/
+$color-chart-bg: #fff;//#F3F9F9;
+$color-label:  #777;
+
+/* map **************************************************/
+$color-map-bg: #E2ECEC;
 $color-all: #a6a6a6;
 $color-hover-el: #ffffb3;
-$color-sel-el: #e5e600;
+$color-sel-map-el: #003FC0;
 $color-chart-path: rgba(0, 0, 0, 0.05);
 $color-sel-border: #000;
 

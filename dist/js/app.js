@@ -251,7 +251,9 @@ CHARTMAP.map = {
     this.g = this.svg.append('g');
     this.addZoomToMap();
 
-    this.addDefinitionForArrow('normal');
+    this.isrCircle = this.g.selectAll('circle.isr-circle').data([this.isrCoods]);
+
+    this.addDefinitionForArrow();
     $.when($.ajax('dist/data/ne_110m_admin_0_countries_v3.topo.json'),
         $.ajax('dist/data/cbs/birthLands.csv'),
         $.ajax('dist/data/landCoords.csv'))
@@ -276,21 +278,21 @@ CHARTMAP.map = {
 
       this.addLegend(_orderedLand, _period);
 
-
       var _minX = _this.isrCoods[0] - 1;
       var _minY = _this.isrCoods[1] - 1;
       var _maxX = _this.isrCoods[0] - 1;
       var _maxY = _this.isrCoods[1] - 1;
-      var _israelCircle = [_this.isrCoods[0], _this.isrCoods[1], 2];
+      var _israelCircle = [_this.isrCoods[0], _this.isrCoods[1], 4];
+
       for (i = 0; i < 5; i++) {
         var _landCoord = _this.landCoords[_orderedLand[i].code];
         //console.log(_landCoord, _orderedLand[i].code);
         var _isrCoods = _this.isrCoods;
-        var _intersectPoint = CHARTMAP.geometricFunctions.getIntersections(_landCoord, _this.isrCoods, _israelCircle);
+        //var _intersectPoint = CHARTMAP.geometricFunctions.getIntersections(_landCoord, _this.isrCoods, _israelCircle);
         //console.log('_intersectPoint', _intersectPoint);
-        if (_intersectPoint && _intersectPoint.points && _intersectPoint.points.intersection1) {
+        /*if (_intersectPoint && _intersectPoint.points && _intersectPoint.points.intersection1) {
           _isrCoods = _intersectPoint.points.intersection1.coords;
-        }
+        }*/
         _links.push({
           id: 'arrow_' + i,
           type: 'LineString',
@@ -319,7 +321,10 @@ CHARTMAP.map = {
     //enter
     pathArcs.enter().append('path')
         .attr('marker-end', function (d) {
-          return 'url(\#arrow-normal' + ')';
+          return 'url(\#point-end' + ')';
+        })
+        .attr('marker-start', function (d) {
+          return 'url(\#point-start' + ')';
         })
         .attr('id', function (d) {
           return d.id;
@@ -329,13 +334,20 @@ CHARTMAP.map = {
         });
 
     this.addLabelToArrow(_links);
-    
+
     pathArcs.exit().remove();
-    
+
     //update
     pathArcs.attr({
       d: this.path
     });
+    
+    this.isrCircle.exit().remove();
+    this.isrCircle.enter().append('circle')
+        .attr('class', 'isr-circle')
+        .attr("cx", function (d) { return _this.projection(d)[0]; })
+		.attr("cy", function (d) { return _this.projection(d)[1]; })
+		.attr("r", "40px");
   },
   // PRIVATE METHODS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   addLabelToArrow: function (links) {
@@ -447,21 +459,46 @@ CHARTMAP.map = {
   },
   /**
    *  Adds the definition to svgContainer of an arrow
-   * @param {string} type - defines the type of arrow
    */
-  addDefinitionForArrow: function (type) {
+  addDefinitionForArrow: function () {
+//    this.svg.append('svg:defs')
+//        .append('svg:marker')
+//        .attr('id', 'point-end')
+//        .attr('refX', 20)
+//        .attr('refY', 20)
+//        .attr('markerUnits', 'strokeWidth')
+//        .attr('markerWidth', 40)
+//        .attr('markerHeight', 40)
+//        .attr('orient', 'auto')
+//        .append("circle")
+//        .attr("cx", 20)
+//        .attr("cy", 20)
+//        .attr("r", 20);
+//    this.svg.append('svg:defs')
+//        .append('svg:marker')
+//        .attr('id', 'arrow-end')
+//        //.attr('viewBox', '0 0 60 8')
+//        .attr('refX', 50)
+//        .attr('refY', 4)
+//        .attr('markerUnits', 'strokeWidth')
+//        .attr('markerWidth', 25)
+//        .attr('markerHeight', 8)
+//        .attr('orient', 'auto')
+//        .append('svg:path')
+//        .attr('d', 'M 0 0 L 25 4 L 0 8 z');
     this.svg.append('svg:defs')
         .append('svg:marker')
-        .attr('id', 'arrow-' + type)
-        .attr('viewBox', '0 0 30 8')
-        .attr('refX', 25)
-        .attr('refY', 4)
+        .attr('id', 'point-start')
+        .attr('refX', 2)
+        .attr('refY', 2)
         .attr('markerUnits', 'strokeWidth')
-        .attr('markerWidth', 25)
-        .attr('markerHeight', 8)
+        .attr('markerWidth', 4)
+        .attr('markerHeight', 4)
         .attr('orient', 'auto')
-        .append('svg:path')
-        .attr('d', 'M 0 0 L 25 4 L 0 8 z');
+        .append("circle")
+        .attr("cx", 2)
+        .attr("cy", 2)
+        .attr("r", 2);
   },
   /**
    * Add legend with the first 5 lands
@@ -474,7 +511,7 @@ CHARTMAP.map = {
       this.$legendDesc.text('NO VALUES FOR THIS PERIOD');
     } else {
       var _delta = this.yearMap[period];
-      this.$legendDesc.text('Values related to the period ' +(_delta?_delta.desc:period));
+      this.$legendDesc.text('Values related to the period ' + (_delta ? _delta.desc : period));
       for (var _index = 0; _index < 5; _index++) {
         var _el = orderedLand[_index];
         this.$legendTable.append('<tr><td>' + _el.land + '</td><td>' + _el[period] + '</td></tr>');
