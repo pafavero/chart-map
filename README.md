@@ -6,8 +6,9 @@ The diagram shows the trend of population and immigration in Israel in the last 
 
 d3.js is used to generate both map and chart.
 Topojson file is generated using data from  <a href="http://www.naturalearthdata.com/target="_blank" >  Natural Earth Data</a>
-
+<p>
 <a href="https://rawgit.com/pafavero/chart-map/master/chart%26map.html" target="_blank" title="Show preview"  >Show preview</a>
+</p>
 <a href="https://rawgit.com/pafavero/chart-map/master/chart%26map.html" target="_blank" title="Show preview" >
     <img src="dist/img/screenshot.JPG" alt="screenshot" />
 </a>
